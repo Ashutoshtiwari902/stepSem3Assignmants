@@ -1,55 +1,38 @@
 package Week1;
 
 public class week1Assignmant {
-    static void analyzeInventory(int[] sectionA, int[] sectionB) {
+    static void classifyWordLengths(String review) {
 
-        int totalA = 0;
-        int totalB = 0;
+        String[] words = review.split(" ");
 
-        // Calculate totals
-        for (int i = 0; i < sectionA.length; i++) {
-            totalA = totalA + sectionA[i];
-            totalB = totalB + sectionB[i];
-        }
+        int shortCount = 0;
+        int mediumCount = 0;
+        int longCount = 0;
 
-        // Check balance
-        if (totalA == totalB) {
-            System.out.println("Balanced");
-        } else {
-            System.out.println("Not Balanced");
-        }
+        for (int i = 0; i < words.length; i++) {
 
-        // Find highest
-        int highest = sectionA[0];
-        int index = 0;
-        String section = "Section A";
+            int len = words[i].length();
 
-        for (int i = 0; i < sectionA.length; i++) {
-
-            if (sectionA[i] > highest) {
-                highest = sectionA[i];
-                index = i;
-                section = "Section A";
+            if (len <= 4) {
+                shortCount++;
             }
-
-            if (sectionB[i] > highest) {
-                highest = sectionB[i];
-                index = i;
-                section = "Section B";
+            else if (len <= 8) {
+                mediumCount++;
+            }
+            else {
+                longCount++;
             }
         }
 
-        System.out.println(
-                "Highest Quantity: " + highest +
-                        " (" + section + ", Item " + (index + 1) + ")"
-        );
+        System.out.println("Short: " + shortCount
+                + " | Medium: " + mediumCount
+                + " | Long: " + longCount);
     }
 
     public static void main(String[] args) {
 
-        int[] sectionA = {20, 15, 30};
-        int[] sectionB = {25, 10, 30};
+        String review = "This movie was absolutely fantastic and thrilling";
 
-        analyzeInventory(sectionA, sectionB);
+        classifyWordLengths(review);
     }
 }
