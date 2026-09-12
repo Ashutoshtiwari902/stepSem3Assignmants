@@ -1,20 +1,29 @@
 package Step;
 
 public class week2Practice {
-    static void parseStudentRecord(String csvLine) {
+    static String validateFileExtension(String filename) {
 
-        String[] fields = csvLine.split(",");
+        int dot = filename.lastIndexOf('.');
 
-        if (fields.length != 3) {
-            System.out.println("Invalid Record");
+        if (dot == -1) {
+            return "Rejected — invalid file type";
+        }
+
+        String extension = filename.substring(dot + 1);
+
+        if (extension.equalsIgnoreCase("pdf") ||
+                extension.equalsIgnoreCase("docx") ||
+                extension.equalsIgnoreCase("zip")) {
+
+            return "Accepted";
         } else {
-            System.out.println("Name: " + fields[0]
-                    + " | Roll No: " + fields[1]
-                    + " | Dept: " + fields[2]);
+            return "Rejected — invalid file type";
         }
     }
 
     public static void main(String[] args) {
-        parseStudentRecord("Ananya Verma,RA2211003010123,CSE");
+
+        System.out.println(validateFileExtension("Assignment1.PDF"));
+        System.out.println(validateFileExtension("notes.txt"));
     }
 }

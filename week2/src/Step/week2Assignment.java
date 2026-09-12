@@ -1,30 +1,22 @@
 package Step;
 public class week2Assignment {
-    static String reverseEachWord(String sentence) {
+    static void parseInventoryRecord(String csvLine) {
 
-        String[] words = sentence.split(" ");
-        String result = "";
+        String[] fields = csvLine.split(",");
 
-        for (int i = 0; i < words.length; i++) {
-
-            StringBuilder sb = new StringBuilder(words[i]);
-
-            sb.reverse();
-
-            result = result + sb.toString();
-
-            if (i < words.length - 1) {
-                result = result + " ";
-            }
+        if (fields.length != 3) {
+            System.out.println("Invalid Record");
+        } else {
+            System.out.println("Product: " + fields[0]
+                    + " | SKU: " + fields[1]
+                    + " | Qty: " + fields[2]);
         }
-
-        return result;
     }
 
     public static void main(String[] args) {
 
-        String answer = reverseEachWord("hello club");
+        parseInventoryRecord("Wireless Mouse,WM-2201,150");
 
-        System.out.println(answer);
+        parseInventoryRecord("Wireless Mouse,150");
     }
 }
