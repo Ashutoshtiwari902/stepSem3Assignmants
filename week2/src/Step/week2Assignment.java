@@ -1,30 +1,55 @@
 package Step;
 public class week2Assignment {
-    static String reverseEachWord(String sentence) {
+    static String normalizeCode(String raw) {
 
-        String[] words = sentence.split(" ");
-        String result = "";
+        raw = raw.trim();
 
-        for (int i = 0; i < words.length; i++) {
+        String first3 = raw.substring(0, 3).toUpperCase();
+        String rest = raw.substring(3);
 
-            StringBuilder sb = new StringBuilder(words[i]);
+        return first3 + rest;
+    }
 
-            sb.reverse();
+    static String validateAndFormat(String code) {
 
-            result = result + sb.toString();
+        // Check length
+        if (code.length() != 13) {
+            return "Invalid — wrong length";
+        }
 
-            if (i < words.length - 1) {
-                result = result + " ";
+        // Check first 3 characters are letters
+        for (int i = 0; i < 3; i++) {
+            if (!Character.isLetter(code.charAt(i))) {
+                return "Invalid — non-letter publisher code";
             }
         }
 
-        return result;
+        // Check remaining 10 characters are digits
+        for (int i = 3; i < 13; i++) {
+            if (!Character.isDigit(code.charAt(i))) {
+                return "Invalid — non-digit body";
+            }
+        }
+
+        // Build formatted output
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[");
+        sb.append(code.substring(0, 3));
+        sb.append("] YEAR: ");
+        sb.append(code.substring(3, 7));
+        sb.append(" | CATALOG: ");
+        sb.append(code.substring(7, 13));
+
+        return sb.toString();
     }
 
     public static void main(String[] args) {
 
-        String answer = reverseEachWord("hello club");
+        String raw = " pen2026004251 ";
 
-        System.out.println(answer);
+        String code = normalizeCode(raw);
+
+        System.out.println(validateAndFormat(code));
     }
 }
