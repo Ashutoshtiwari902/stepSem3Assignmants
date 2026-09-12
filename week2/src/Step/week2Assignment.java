@@ -1,30 +1,61 @@
 package Step;
+import java.util.*;
 public class week2Assignment {
-    static String reverseEachWord(String sentence) {
+    static void printFilteredWordFrequency(String feedback) {
 
-        String[] words = sentence.split(" ");
-        String result = "";
+        // Stop words
+        Set<String> stopWords = new HashSet<>();
 
-        for (int i = 0; i < words.length; i++) {
+        stopWords.add("the");
+        stopWords.add("was");
+        stopWords.add("and");
+        stopWords.add("a");
+        stopWords.add("is");
+        stopWords.add("of");
+        stopWords.add("in");
 
-            StringBuilder sb = new StringBuilder(words[i]);
+        // Convert to lowercase and remove punctuation
+        feedback = feedback.toLowerCase();
+        feedback = feedback.replace(",", "");
+        feedback = feedback.replace(".", "");
 
-            sb.reverse();
+        // Split into words
+        String[] words = feedback.split("\\s+");
 
-            result = result + sb.toString();
+        // Store word frequencies
+        HashMap<String, Integer> frequency = new HashMap<>();
 
-            if (i < words.length - 1) {
-                result = result + " ";
+        for (String word : words) {
+
+            // Skip stop words
+            if (stopWords.contains(word)) {
+                continue;
+            }
+
+            if (frequency.containsKey(word)) {
+                frequency.put(word, frequency.get(word) + 1);
+            } else {
+                frequency.put(word, 1);
             }
         }
 
-        return result;
+        // Convert map to list
+        ArrayList<Map.Entry<String, Integer>> list =
+                new ArrayList<>(frequency.entrySet());
+
+        // Sort by count in descending order
+        list.sort((a, b) -> b.getValue() - a.getValue());
+
+        // Print result
+        for (Map.Entry<String, Integer> entry : list) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
     }
 
     public static void main(String[] args) {
 
-        String answer = reverseEachWord("hello club");
-
-        System.out.println(answer);
+        printFilteredWordFrequency(
+                "The mentor was great, the session was great and clear."
+        );
     }
 }
