@@ -16,8 +16,7 @@ public class week2Practice {
                 consonants++;
             }
         }
-        System.out.println("Vowels: " + vowels +
-                " | Consonants: " + consonants);
+        System.out.println("Vowels: " + vowels + " | Consonants: " + consonants);
     }
     public static void main(String[] args){
         countVowelsAndConsonants("Java Programming");
