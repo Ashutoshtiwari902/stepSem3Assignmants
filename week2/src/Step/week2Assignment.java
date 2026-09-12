@@ -1,17 +1,30 @@
 package Step;
 public class week2Assignment {
-    static void checkPinLength(String pin) {
-        int length = pin.length();
+    static String reverseEachWord(String sentence) {
 
-        if (length != 4) {
-            System.out.println("Invalid PIN — must be exactly 4 digits.");
-        } else {
-            System.out.println("PIN length OK.");
+        String[] words = sentence.split(" ");
+        String result = "";
+
+        for (int i = 0; i < words.length; i++) {
+
+            StringBuilder sb = new StringBuilder(words[i]);
+
+            sb.reverse();
+
+            result = result + sb.toString();
+
+            if (i < words.length - 1) {
+                result = result + " ";
+            }
         }
+
+        return result;
     }
 
     public static void main(String[] args) {
-        checkPinLength("482");
-        checkPinLength("4820");
+
+        String answer = reverseEachWord("hello club");
+
+        System.out.println(answer);
     }
 }
